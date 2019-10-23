@@ -91,10 +91,6 @@ resource "aws_s3_bucket" "transactor_logs" {
   bucket = "${var.resource_prefix}${var.env}-transactor-logs"
   region = "${var.region}"
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   tags {
     Environment = "${var.env}"
   }
