@@ -90,7 +90,6 @@ EOF
 resource "aws_s3_bucket" "transactor_logs" {
   bucket = "${var.resource_prefix}${var.env}-transactor-logs"
   region = "${var.region}"
-  force_destroy = true
 
   lifecycle {
     prevent_destroy = true
