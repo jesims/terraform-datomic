@@ -47,7 +47,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "transactor_cloudwatch" {
-  name = "${var.resource_prefix}${var.env}-cloudwatch_access_policy"
+  name = "${var.resource_prefix}${var.env}-datomic-transactors-cloudwatch_access_policy"
   role = "${aws_iam_role.transactor.id}"
 
   policy = <<EOF
@@ -88,7 +88,7 @@ EOF
 }
 
 resource "aws_s3_bucket" "transactor_logs" {
-  bucket = "${var.resource_prefix}${var.env}-transactor-logs"
+  bucket = "${var.resource_prefix}${var.env}-datomic-transactor-logs"
   region = "${var.region}"
 
   tags {
@@ -97,7 +97,7 @@ resource "aws_s3_bucket" "transactor_logs" {
 }
 
 resource "aws_iam_role_policy" "transactor_logs" {
-  name = "${var.resource_prefix}${var.env}-s3_logs_access_policy"
+  name = "${var.resource_prefix}${var.env}-datomic-s3_logs_access_policy"
   role = "${aws_iam_role.transactor.id}"
 
   policy = <<EOF
@@ -110,7 +110,7 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "transactor" {
-  name = "${var.resource_prefix}${var.env}-transactor_profile"
+  name = "${var.resource_prefix}${var.env}-datomic-transactor_profile"
   role = "${aws_iam_role.transactor.name}"
 }
 
@@ -184,7 +184,7 @@ data "template_file" "transactor_user_data" {
 }
 
 resource "aws_launch_configuration" "transactor" {
-  name_prefix = "${var.resource_prefix}${var.env}-transactor-"
+  name_prefix = "${var.resource_prefix}${var.env}-datomic-transactor-"
   image_id = "${data.aws_ami.transactor.id}"
   instance_type = "${var.transactor_instance_type}"
   iam_instance_profile = "${aws_iam_instance_profile.transactor.name}"
@@ -215,7 +215,7 @@ resource "aws_autoscaling_group" "transactors" {
 
   tag {
     key = "Name"
-    value = "${var.resource_prefix}${var.env}-transactor"
+    value = "${var.resource_prefix}${var.env}-datomic-transactor"
     propagate_at_launch = true
   }
 
