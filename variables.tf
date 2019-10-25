@@ -34,7 +34,6 @@ variable "region" {
 
 variable "transactor_instance_type" {
   description = "Instance type and size"
-  default = "t2.micro"
 }
 
 variable "transactor_instance_virtualization_type" {
@@ -57,17 +56,14 @@ variable "transactor_deploy_bucket" {
 
 variable "transactor_xmx" {
   description = "The maximum size, in bytes, of the memory allocation pool. This value must a multiple of 1024 greater than 2MB."
-  default = "512m"
 }
 
 variable "transactor_java_opts" {
   description = "JAVA_OPTS to pass to Datomic (It's unclear what this actually does)"
-  default = ""
 }
 
 variable "transactor_memory_index_max" {
   description = "Apply back pressure to let indexing catch up"
-  default = "64m"
 }
 
 variable "transactor_memory_index_threshold" {
@@ -77,5 +73,4 @@ variable "transactor_memory_index_threshold" {
 
 variable "transactor_object_cache_max" {
   description = "Size of the object cache"
-  default = "128m"
 }
