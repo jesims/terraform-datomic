@@ -8,12 +8,12 @@ variable "vpc_name" {
 
 variable "resource_prefix" {
   description = "Prefix to be applied to all resources"
-  default = ""
+  default     = ""
 }
 
 variable "dynamo_table" {
   description = "Prefix to be applied to all resources"
-  default = ""
+  default     = ""
 }
 
 variable "datomic_license" {
@@ -38,12 +38,12 @@ variable "transactor_instance_type" {
 
 variable "transactor_instance_virtualization_type" {
   description = "Virtualization type for the instance."
-  default = "hvm"
+  default     = "hvm"
 }
 
 variable "transactors" {
   description = "Number of transactors to run"
-  default = "1"
+  default     = "1"
 }
 
 variable "subnet_name" {
@@ -68,7 +68,7 @@ variable "transactor_memory_index_max" {
 
 variable "transactor_memory_index_threshold" {
   description = "Start building index when this is reached"
-  default = "16m"
+  default     = "16m"
 }
 
 variable "transactor_object_cache_max" {
