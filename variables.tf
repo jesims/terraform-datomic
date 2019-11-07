@@ -74,3 +74,18 @@ variable "transactor_memory_index_threshold" {
 variable "transactor_object_cache_max" {
   description = "Size of the object cache"
 }
+
+variable "alarm_sns_topic" {
+  description = "The SNS topic to send alarms"
+}
+
+variable "alarm_metrics" {
+  type = "list"
+
+  default = [
+    "Alarm",
+    "AlarmHeartbeatFailed",
+    "AlarmIndexingFailed",
+    "AlarmUnableToWriteLog",
+  ]
+}
