@@ -259,7 +259,7 @@ resource "aws_cloudwatch_metric_alarm" "transactor_alarm" {
   ]
 
   dimensions {
-    Transactor = "${var.resource_prefix}${var.env}-datomic-transactor"
+    Transactor = "${data.template_file.transactor_user_data.vars.cloudwatch_dimension}"
   }
 
   alarm_actions = [
