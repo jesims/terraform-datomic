@@ -237,3 +237,36 @@ resource "aws_autoscaling_group" "transactors" {
     value               = "${var.env}"
   }
 }
+
+data "aws_sns_topic" "alarm" {
+  name = "${var.alarm_sns_topic}"
+}
+
+resource "aws_cloudwatch_metric_alarm" "transactor_alarm" {
+  count               = "${length(var.alarm_metrics)}"
+  alarm_name          = "${var.resource_prefix}${var.env}-datomic-transactors_${var.alarm_metrics[count.index]}_alarm"
+  namespace           = "Datomic"
+  metric_name         = "${var.alarm_metrics[count.index]}"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  datapoints_to_alarm = 1
+  threshold           = 1
+  statistic           = "SampleCount"
+  period              = 60
+  evaluation_periods  = 1
+
+  depends_on = [
+    "aws_autoscaling_group.transactors",
+  ]
+
+  dimensions {
+    Transactor = "${var.resource_prefix}${var.env}-datomic-transactor"
+  }
+
+  alarm_actions = [
+    "${data.aws_sns_topic.alarm.arn}",
+  ]
+
+  tags {
+    Environment = "${var.env}"
+  }
+}
